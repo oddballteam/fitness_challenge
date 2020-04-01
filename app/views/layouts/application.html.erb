@@ -10,8 +10,14 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <main class="container mx-auto">
+      <section class="flash">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </section>
+      <section class="content">
+        <%= yield %>
+      </section>
+    </main>
   </body>
 </html>
