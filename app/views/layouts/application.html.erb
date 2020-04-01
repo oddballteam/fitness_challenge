@@ -9,15 +9,25 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <main class="container mx-auto">
-      <section class="flash">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-      </section>
-      <section class="content">
-        <%= yield %>
-      </section>
+  <body class="bg-gray-300 text-base text-grey-darkest font-normal relative">
+    <main class="container mx-auto font-sans p-8">
+      <div class="mx-auto max-w-sm">
+        <section class="flash">
+          <% unless notice.nil? %>
+            <div class="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3" role="notice">
+              <p><%= notice %></p>
+            </div>
+          <% end %>
+          <% unless alert.nil? %>
+            <div class="flex items-center bg-red-500 text-white text-sm font-bold px-4 py-3" role="alert">
+              <p><%= alert %></p>
+            </div>
+          <% end %>
+        </section>
+        <section class="content">
+          <%= yield %>
+        </section>
+      </div>
     </main>
   </body>
 </html>
