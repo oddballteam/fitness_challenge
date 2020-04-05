@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+  username: oddball_fitness
+  password:
+
+development:
+  <<: *default
+  database: oddball_fitness_development
+  username: oddball_fitness
+  password:
+
+test:
+  <<: *default
+  database: oddball_fitness_test

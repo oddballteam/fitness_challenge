@@ -33,3 +33,5 @@ yarn-debug.log*
 .yarn-integrity
 *.DS_Store
 *.swp
+
+config/database.yml
