@@ -5,3 +5,9 @@ default: &default
   username: <%= ENV['PGUSER'] %>
   password: <%= ENV['PGPASS'] %>
   database: <%= ENV['PGDB'] %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
