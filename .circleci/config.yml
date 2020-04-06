@@ -40,13 +40,13 @@ jobs: # a collection of steps
 
       - run: # Install Ruby dependencies
           name: Bundle Install
-          command: bundle check --path vendor/bundle || bundle install --deployment
+          command: bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       # Store bundle cache for Ruby dependencies
       - save_cache:
           key: oddball-fitness-bundle-v2-{{ checksum "Gemfile.lock" }}
           paths:
-            - vendor/bundle
+            - ./vendor/bundle
 
       # Only necessary if app uses webpacker or yarn in some other way
       - restore_cache:
