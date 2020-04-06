@@ -1,0 +1,7 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+  username: <%= ENV['PGUSER'] %>
+  password: <%= ENV['PGPASS'] %>
+  database: <%= ENV['PGDB'] %>
