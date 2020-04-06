@@ -1,0 +1,10 @@
+<div class="flex justify-between items-center py-4">
+  <div class="flex-shrink-0 cursor-pointer">
+    <span class="text-xl text-oddball font-semibold">Oddball Fitness</span>
+  </div>
+  <ul class="hidden md:flex overflow-x-hidden font-semibold">
+    <li class="mr-6 p-1 border-b-2">
+      <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "text-oddball cursor-pointer hover:text-oddball-lighter") %>
+    </li>
+  </ul>
+</div>
