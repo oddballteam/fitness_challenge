@@ -38,6 +38,7 @@ class UsersTest < ApplicationSystemTestCase
 
   test 'Forgot Password' do
     user = FactoryBot.create(:user)
+    new_pass = FFaker::Internet.password
 
     visit root_url
     click_on 'Forgot Password?'
@@ -47,6 +48,15 @@ class UsersTest < ApplicationSystemTestCase
     fill_in 'Email', with: user.email
     click_on 'Send password reset instructions'
 
-    assert page.has_content? 'You will receive an email with instructions on how to reset your password in a few minutes.'
+    assert page.has_content? 'You will receive an email with instructions on'
+
+    # user.reload!
+
+    visit edit_user_password_url(user.send_reset_password_instructions)
+
+    assert page.has_content? 'Change your password'
+    fill_in 'New Password', with: new_pass
+    fill_in 'Confirm new password', with: new_pass
+    click_on 'Change my password'
   end
 end
