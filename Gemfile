@@ -36,3 +36,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'devise', '~> 4.7'
 
 gem 'pg', '~> 1.2'
+
+gem "ffaker", "~> 2.14", :group => :test
