@@ -91,8 +91,6 @@ jobs: # a collection of steps
       # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
 
   deploy:
-    docker:
-      - image: <docker-image-name-tag>
     steps:
       - checkout
       - run:
