@@ -13,7 +13,7 @@ class UsersTest < ApplicationSystemTestCase
     fill_in 'Password', with: user.password
     click_on 'Log in'
 
-    assert page.has_content? 'Signed in successfully.'
+    assert page.has_content? 'Signed in successfully'
 
     click_on 'Logout'
 
@@ -33,7 +33,7 @@ class UsersTest < ApplicationSystemTestCase
     fill_in 'Password confirmation', with: user.password
     click_on 'Sign up'
 
-    assert page.has_content? 'Welcome! You have signed up successfully.'
+    assert page.has_content? 'Welcome! You have signed up successfully'
   end
 
   test 'Forgot Password' do
@@ -44,19 +44,30 @@ class UsersTest < ApplicationSystemTestCase
     click_on 'Forgot Password?'
 
     assert page.has_content? 'Forgot Your Password?'
+    assert_equal ActionMailer::Base.deliveries.count, 0
 
     fill_in 'Email', with: user.email
     click_on 'Send password reset instructions'
 
     assert page.has_content? 'You will receive an email with instructions on'
+    assert_equal ActionMailer::Base.deliveries.count, 1
 
-    # user.reload!
-
-    visit edit_user_password_url(user.send_reset_password_instructions)
+    refute_empty unread_emails_for(user.email)
+    open_email(user.email, with_subject: 'Reset password instructions')
+    click_first_link_in_email
 
     assert page.has_content? 'Change your password'
     fill_in 'New Password', with: new_pass
     fill_in 'Confirm new password', with: new_pass
     click_on 'Change my password'
+
+    assert page.has_content? 'Your password has been changed successfully'
+    click_on 'Logout'
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: new_pass
+    click_on 'Log in'
+
+    assert page.has_content? 'Signed in successfully'
   end
 end

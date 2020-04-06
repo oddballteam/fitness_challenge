@@ -38,3 +38,7 @@ gem 'devise', '~> 4.7'
 gem 'pg', '~> 1.2'
 
 gem "ffaker", "~> 2.14", :group => :test
+
+gem "email_spec", "~> 2.2", :group => :test
+
+gem "minitest-matchers", "~> 1.4", :group => :test
