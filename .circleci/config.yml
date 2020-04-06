@@ -79,7 +79,7 @@ jobs: # a collection of steps
           command: bin/rails db:schema:load --trace
 
       - run:
-          name: Run rspec in parallel
+          name: Run tests in parallel
           command: |
             bundle exec rails test \
               $(circleci tests glob "test/**/*_test.rb" | circleci tests split --split-by=timings)
