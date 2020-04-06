@@ -1,10 +1,8 @@
 <div class="flex justify-between items-center py-4">
-  <%# <div class="flex-shrink-0 ml-10 cursor-pointer">
-    <i class="fas fa-drafting-compass fa-2x text-orange-500"></i>
-    <span class="ml-1 text-3xl text-blue-200 font-semibold">WebCraft</span>
-  </div> %>
-  <i class="fas fa-bars fa-2x visible md:invisible mr-10 md:mr-0 text-oddball cursor-pointer"></i>
-  <ul class="hidden md:flex overflow-x-hidden mr-10 font-semibold">
+  <div class="flex-shrink-0 cursor-pointer">
+    <span class="text-xl text-oddball font-semibold">Oddball Fitness</span>
+  </div>
+  <ul class="hidden md:flex overflow-x-hidden font-semibold">
     <li class="mr-6 p-1 border-b-2">
       <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "text-oddball cursor-pointer hover:text-oddball-lighter") %>
     </li>
