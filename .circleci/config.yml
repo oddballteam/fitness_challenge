@@ -1,21 +1,24 @@
 version: 2 # use CircleCI 2.0
+
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     parallelism: 2 # run three instances of this job in parallel
     docker: # run the steps with Docker
-      - image: circleci/ruby:2.6.5-buster # ...with this image as the primary container; this is where all `steps` will run
+      - image: circleci/ruby:2.6.5-node # ...with this image as the primary container; this is where all `steps` will run
         environment: # environment variables for primary container
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
           PGHOST: 127.0.0.1
           PGUSER: oddball_fitness
+          PGPASS: "0ddb@ll"
+          PGDB: oddball_fitness_test
           RAILS_ENV: test
       - image: circleci/postgres:9.5-alpine # database image
         environment: # environment variables for database
           POSTGRES_USER: oddball_fitness
           POSTGRES_DB: oddball_fitness_test
-          POSTGRES_PASSWORD: ""
+          POSTGRES_PASSWORD: "0ddb@ll"
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
 
@@ -40,13 +43,13 @@ jobs: # a collection of steps
 
       - run: # Install Ruby dependencies
           name: Bundle Install
-          command: bundle check --path vendor/bundle || bundle install --deployment
+          command: bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       # Store bundle cache for Ruby dependencies
       - save_cache:
           key: oddball-fitness-bundle-v2-{{ checksum "Gemfile.lock" }}
           paths:
-            - vendor/bundle
+            - ./vendor/bundle
 
       # Only necessary if app uses webpacker or yarn in some other way
       - restore_cache:
@@ -69,11 +72,15 @@ jobs: # a collection of steps
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
+          name: Configure DB
+          command: cp ./config/database.yml.ci ./config/database.yml
+
+      - run:
           name: Database setup
           command: bin/rails db:schema:load --trace
 
       - run:
-          name: Run rspec in parallel
+          name: Run tests in parallel
           command: |
             bundle exec rails test \
               $(circleci tests glob "test/**/*_test.rb" | circleci tests split --split-by=timings)
@@ -82,3 +89,25 @@ jobs: # a collection of steps
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test_results
       # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
+
+  deploy:
+    docker:
+      - image: <docker-image-name-tag>
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build # only run deploy-via-git job if the build job has completed
+          filters:
+            branches:
+              only: master # only run deploy-via-git job on master branch
