@@ -72,7 +72,7 @@ jobs: # a collection of steps
 
       - run:
           name: Configure DB
-          command: cp config/database.yml.ci config/database.yml
+          command: cp ./config/database.yml.ci ./config/database.yml
 
       - run:
           name: Database setup
