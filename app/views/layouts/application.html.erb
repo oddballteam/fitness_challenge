@@ -13,11 +13,18 @@
   </head>
 
   <body class="bg-gray-300 text-base text-grey-darkest font-normal relative">
-    <main class="container mx-auto font-sans p-8">
+    <% if !user_signed_in? %>
+      <% @mainClass = 'container mx-auto font-sans p-8 flex h-screen' %>
+      <% @divClass = 'max-w-xs m-auto w-full' %>
+    <% else %>
+      <% @mainClass = 'container mx-auto font-sans p-8' %>
+      <% @divClass = 'max-w-m mx-auto' %>
+    <% end %>
+    <main class="<%= @mainClass %>">
       <% if user_signed_in? %>
         <%= render partial: "shared/header" %>
       <% end %>
-      <div class="mx-auto max-w-m">
+      <div class="<%= @divClass %>">
         <%= render partial: "shared/flash" %>
         <section class="content">
           <%= yield %>
