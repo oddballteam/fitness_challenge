@@ -43,7 +43,7 @@ commands:
       - run: cp ./config/database.yml.ci ./config/database.yml
 
       # Setup the database
-      - run: bundle exec rake db:setup
+      - run: bin/rails db:schema:load --trace
 
       - run:
           name: Run tests in parallel
