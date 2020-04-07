@@ -1,57 +1,26 @@
-version: 2 # use CircleCI 2.0
+---
+version: 2.1
 
-jobs: # a collection of steps
-  build: # runs not using Workflows must have a `build` job as entry point
-    parallelism: 2 # run three instances of this job in parallel
-    docker: # run the steps with Docker
-      - image: circleci/ruby:2.6.5-node-browsers # ...with this image as the primary container; this is where all `steps` will run
-        environment: # environment variables for primary container
-          BUNDLE_JOBS: 3
-          BUNDLE_RETRY: 3
-          BUNDLE_PATH: vendor/bundle
-          PGHOST: 127.0.0.1
-          PGUSER: oddball_fitness
-          PGPASS: "0ddb@ll"
-          PGDB: oddball_fitness_test
-          RAILS_ENV: test
-      - image: circleci/postgres:9.5-alpine # database image
-        environment: # environment variables for database
-          POSTGRES_USER: oddball_fitness
-          POSTGRES_DB: oddball_fitness_test
-          POSTGRES_PASSWORD: "0ddb@ll"
-    steps: # a collection of executable commands
-      - checkout # special step to check out source code to working directory
+commands:
+  build:
+    steps:
+      - checkout
 
-      # Which version of bundler?
-      - run:
-          name: Which bundler?
-          command: bundle -v
-
-      - run:
-          name: Configure Bundler
-          command: |
-            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
-            source $BASH_ENV
-            gem install bundler
-
-      # Restore bundle cache
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      # Restore Cached Dependencies
       - restore_cache:
-          keys:
-            - oddball-fitness-bundle-v2-{{ checksum "Gemfile.lock" }}
-            - oddball-fitness-bundle-v2-
+          name: Restore bundle cache
+          key: oddball-fitness-{{ checksum "Gemfile.lock" }}
 
-      - run: # Install Ruby dependencies
-          name: Bundle Install
-          command: bundle install --jobs=4 --retry=3 --path vendor/bundle
+      # Bundle install dependencies
+      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
 
-      # Store bundle cache for Ruby dependencies
+      # Cache Dependencies
       - save_cache:
-          key: oddball-fitness-bundle-v2-{{ checksum "Gemfile.lock" }}
+          name: Store bundle cache
+          key: oddball-fitness-{{ checksum "Gemfile.lock" }}
           paths:
-            - ./vendor/bundle
+            - vendor/bundle
 
-      # Only necessary if app uses webpacker or yarn in some other way
       - restore_cache:
           keys:
             - oddball-fitness-yarn-{{ checksum "yarn.lock" }}
@@ -67,18 +36,16 @@ jobs: # a collection of steps
           paths:
             - ~/.cache/yarn
 
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      # Wait for DB
+      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-      - run:
-          name: Configure DB
-          command: cp ./config/database.yml.ci ./config/database.yml
+      # Setup the environment
+      - run: cp ./config/database.yml.ci ./config/database.yml
 
-      - run:
-          name: Database setup
-          command: bin/rails db:schema:load --trace
-
+      # Setup the database
+      - run: bundle exec rake db:setup
+  test:
+    steps:
       - run:
           name: Run tests in parallel
           command: bundle exec rails test $(circleci tests glob "test/**/*_test.rb" | circleci tests split --split-by=timings)
@@ -86,14 +53,9 @@ jobs: # a collection of steps
       - run:
           name: Run test:system in parallel
           command: bundle exec rails test:system $(circleci tests glob "test/system/*_test.rb" | circleci tests split --split-by=timings)
-          # command: |
-          #   # bundle exec rails test \
-          #   #   $(circleci tests glob "test/**/*_test.rb" | circleci tests split --split-by=timings)
 
-      # Save test results for timing analysis
-      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+      - store_test_results:
           path: test_results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
 
   deploy:
     machine:
@@ -106,14 +68,32 @@ jobs: # a collection of steps
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
             heroku run rake db:migrate --app $HEROKU_APP_NAME
 
+default_job: &default_job
+  working_directory: ~/administrate
+  steps:
+    - build
+    - test
+    - deploy
+
+jobs:
+  ruby-26:
+    <<: *default_job
+    docker:
+      - image: circleci/ruby:2.6.5-node-browsers-legacy
+        environment:
+          PGHOST: localhost
+          PGUSER: oddball_fitness
+          PGPASS: "0ddb@ll"
+          PGDB: oddball_fitness_test
+          RAILS_ENV: test
+      - image: postgres:10.1-alpine
+        environment:
+          POSTGRES_USER: oddball_fitness
+          POSTGRES_DB: oddball_fitness_test
+          POSTGRES_PASSWORD: "0ddb@ll"
+
 workflows:
   version: 2
-  build-deploy:
+  BTD:
     jobs:
-      - build
-      - deploy:
-          requires:
-            - build # only run deploy-via-git job if the build job has completed
-          filters:
-            branches:
-              only: master # only run deploy-via-git job on master branch
+      - ruby-26
