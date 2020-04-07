@@ -4,7 +4,7 @@ jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     parallelism: 2 # run three instances of this job in parallel
     docker: # run the steps with Docker
-      - image: circleci/ruby:2.6.5-node # ...with this image as the primary container; this is where all `steps` will run
+      - image: circleci/ruby:2.6.5-node-browsers # ...with this image as the primary container; this is where all `steps` will run
         environment: # environment variables for primary container
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -81,9 +81,14 @@ jobs: # a collection of steps
 
       - run:
           name: Run tests in parallel
-          command: |
-            bundle exec rails test \
-              $(circleci tests glob "test/**/*_test.rb" | circleci tests split --split-by=timings)
+          command: bundle exec rails test $(circleci tests glob "test/**/*_test.rb" | circleci tests split --split-by=timings)
+
+      - run:
+          name: Run test:system in parallel
+          command: bundle exec rails test:system $(circleci tests glob "test/system/*_test.rb" | circleci tests split --split-by=timings)
+          # command: |
+          #   # bundle exec rails test \
+          #   #   $(circleci tests glob "test/**/*_test.rb" | circleci tests split --split-by=timings)
 
       # Save test results for timing analysis
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
