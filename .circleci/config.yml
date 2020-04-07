@@ -2,7 +2,7 @@
 version: 2.1
 
 commands:
-  build:
+  tests:
     steps:
       - checkout
 
@@ -44,8 +44,7 @@ commands:
 
       # Setup the database
       - run: bundle exec rake db:setup
-  test:
-    steps:
+
       - run:
           name: Run tests in parallel
           command: bundle exec rails test $(circleci tests glob "test/**/*_test.rb" | circleci tests split --split-by=timings)
@@ -67,9 +66,8 @@ commands:
             heroku run rake db:migrate --app $HEROKU_APP_NAME
 
 default_job: &default_job
-  working_directory: ~/administrate
+  working_directory: ~/oddball-fitness
   steps:
-    - build
     - test
     - deploy
 
@@ -92,6 +90,6 @@ jobs:
 
 workflows:
   version: 2
-  BTD:
+  TD:
     jobs:
       - ruby-26
