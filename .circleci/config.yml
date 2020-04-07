@@ -58,8 +58,6 @@ commands:
           path: test_results
 
   deploy:
-    machine:
-      enabled: true
     steps:
       - checkout
       - run:
