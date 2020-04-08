@@ -10,7 +10,7 @@ RSpec.describe 'Challenges', type: :system do
     sign_in_as(user)
   end
 
-  it 'saves and displays the challenge' do
+  it 'saves a challenge' do
     click_on 'Create Challenge'
 
     expect(page).to have_text 'Create a Challenge'
@@ -36,5 +36,20 @@ RSpec.describe 'Challenges', type: :system do
     click_on 'Delete'
 
     expect(page).to_not have_text challenge.name
+  end
+
+  it 'edits a challenge' do
+    challenge = FactoryBot.create(:challenge)
+    new_name = FFaker::Lorem.words(2).join(' ')
+    visit root_url
+    expect(page).to have_text challenge.name
+
+    click_on 'Edit'
+    expect(page).to have_text challenge.name
+
+    fill_in 'Name', with: new_name
+    click_on 'Update Challenge'
+
+    expect(page).to have_text new_name
   end
 end

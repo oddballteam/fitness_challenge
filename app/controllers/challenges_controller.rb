@@ -10,6 +10,20 @@ class ChallengesController < ApplicationController
     redirect_to root_path
   end
 
+  def edit
+    @challenge = Challenge.find(params[:id])
+  end
+
+  def update
+    @challenge = Challenge.find(params[:id])
+
+    if @challenge.update(challenge_params)
+      redirect_to root_path
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
     @challenge = Challenge.find(params[:id])
     @challenge.destroy
