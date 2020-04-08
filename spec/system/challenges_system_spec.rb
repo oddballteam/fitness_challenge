@@ -11,7 +11,7 @@ RSpec.describe 'Challenges', type: :system do
   end
 
   it 'saves and displays the challenge' do
-    visit new_challenge_url
+    click_on 'Create Challenge'
 
     expect(page).to have_text 'Create a Challenge'
 
@@ -26,5 +26,15 @@ RSpec.describe 'Challenges', type: :system do
     expect(page).to have_text challenge.description
     expect(page).to have_text challenge.start_date.strftime('%B %d, %Y')
     expect(page).to have_text challenge.end_date.strftime('%B %d, %Y')
+  end
+
+  it 'deletes a challenge' do
+    challenge = FactoryBot.create(:challenge)
+    visit root_url
+    expect(page).to have_text challenge.name
+
+    click_on 'Delete'
+
+    expect(page).to_not have_text challenge.name
   end
 end
