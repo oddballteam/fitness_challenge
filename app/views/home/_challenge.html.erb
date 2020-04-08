@@ -25,9 +25,9 @@
       </p>
     </div>
     <div class="flex items-center">
-      <img class="w-10 h-10 rounded-full mr-4" src="https://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest("benniemosher@gmail.com") %>?s=200" alt="Trophy">
+      <img class="w-10 h-10 rounded-full mr-4" src="https://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(challenge.user.email) %>?s=40" alt="Trophy">
       <div class="text-sm">
-        <p class="text-gray-900 leading-none">benniemosher@gmail.com</p>
+        <p class="text-gray-900 leading-none"><%= challenge.user.email %></p>
       </div>
     </div>
   </div>
