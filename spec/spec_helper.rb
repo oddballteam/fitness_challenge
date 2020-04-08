@@ -16,6 +16,7 @@
 require 'capybara/rspec'
 require 'email_spec'
 require 'email_spec/rspec'
+require 'support/helpers/authentication'
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
