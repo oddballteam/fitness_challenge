@@ -81,14 +81,7 @@ jobs: # a collection of steps
 
       - run:
           name: Run tests in parallel
-          command: bundle exec rails test $(circleci tests glob "test/**/*_test.rb" | circleci tests split --split-by=timings)
-
-      - run:
-          name: Run test:system in parallel
-          command: bundle exec rails test:system $(circleci tests glob "test/system/*_test.rb" | circleci tests split --split-by=timings)
-          # command: |
-          #   # bundle exec rails test \
-          #   #   $(circleci tests glob "test/**/*_test.rb" | circleci tests split --split-by=timings)
+          command: bundle exec rspec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
       # Save test results for timing analysis
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
