@@ -7,14 +7,14 @@ class ChallengesController < ApplicationController
 
   def create
     @challenge = Challenge.create(challenge_params.merge(user_id: current_user.id))
-    redirect_to root_path
+    redirect_to home_path
   end
 
   def destroy
     @challenge = Challenge.find(params[:id])
     @challenge.destroy
 
-    redirect_to root_path
+    redirect_to home_path
   end
 
   private
