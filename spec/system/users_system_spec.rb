@@ -3,20 +3,24 @@
 require 'rails_helper'
 
 RSpec.describe 'New User', type: :system do
-  it 'signing up' do
-    user = FactoryBot.build(:user)
+  let(:user) { FactoryBot.build(:user) }
 
+  before(:each) do
     visit root_url
+    expect(page).to have_text 'Log in'
+  end
+
+  it 'signing up' do
     click_on 'Sign Up'
 
-    assert page.has_content? 'Sign up'
+    expect(page).to have_text 'Sign up'
 
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
     fill_in 'Password confirmation', with: user.password
     click_on 'Sign up'
 
-    assert page.has_content? 'Welcome! You have signed up successfully'
+    expect(page).to have_text 'Welcome! You have signed up successfully'
   end
 end
 
