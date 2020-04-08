@@ -3,6 +3,7 @@
     <div class="mb-4">
       <h2 class="text-2xl">Create a Challenge</h2>
     </div>
+
     <div class="mb-4">
       <%= f.label :name, class: "block text-gray-700 text-sm font-bold mb-2" %>
       <%= f.text_field :name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
@@ -16,7 +17,7 @@
       <%= f.text_field :start_date, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
       data: {
         controller: "flatpickr",
-        flatpickr_enable_time: true,
+        flatpickr_date_format: "%B %d, %Y",
         flatpickr_min_date: Time.zone.now
       } %>
     </div>
@@ -25,7 +26,7 @@
       <%= f.text_field :end_date, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
       data: {
         controller: "flatpickr",
-        flatpickr_enable_time: true,
+        flatpickr_date_format: "%B %d, %Y",
         flatpickr_min_date: Time.zone.now
       } %>
     </div>
