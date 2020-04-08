@@ -1,3 +1,8 @@
 <div class="w-full max-w-m">
-  <h1 class="text-4xl">Home</h1>
+  <h1 class="text-4xl mb-10">Home</h1>
+
+  <h2 class="text-2xl mb-2">Challenges</h2>
+  <div class="flex justify-between items-center">
+    <%= render partial: 'challenge', collection: @challenges %>
+  </div>
 </div>
