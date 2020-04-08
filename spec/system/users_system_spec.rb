@@ -28,24 +28,15 @@ RSpec.describe 'Existing User', type: :system do
   let(:user) { FactoryBot.create(:user) }
   let(:new_pass) { FFaker::Internet.password }
 
-  before(:each) do
-    visit root_url
-    expect(page).to have_text 'Log in'
-  end
-
   it 'logging in and out' do
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_on 'Log in'
-
-    expect(page).to have_text 'Signed in successfully'
-
+    sign_in_as(user)
     click_on 'Logout'
 
     expect(page).to have_text 'Log in'
   end
 
   it 'Forgot Password' do
+    visit root_url
     click_on 'Forgot Password?'
 
     expect(page).to have_text 'Forgot Your Password?'
