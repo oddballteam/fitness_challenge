@@ -6,4 +6,6 @@ class Challenge < ApplicationRecord
   validates_presence_of :end_date
 
   belongs_to :user
+
+  attribute :unit, :string, default: 'set'
 end

@@ -6,7 +6,6 @@ FactoryBot.define do
     description { FFaker::Lorem.sentence }
     start_date { 3.days.ago }
     end_date { Date.today + 3 }
-    unit { 'rounds' }
     user
   end
 end
