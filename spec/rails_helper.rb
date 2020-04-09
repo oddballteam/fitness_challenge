@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'simplecov'
+SimpleCov.start 'rails'
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
@@ -8,8 +11,13 @@ require File.expand_path('../config/environment', __dir__)
 if Rails.env.production?
   abort('The Rails environment is running in production mode!')
 end
+
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+
+require 'capybara/rspec'
+require 'email_spec'
+require 'email_spec/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -24,7 +32,8 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')]
+  .sort.each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -64,7 +73,7 @@ RSpec.configure do |config|
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
-  # config.filter_gems_from_backtrace("gem name")
+  # config.filter_gems_from_backtrace('gem name')
 
   config.include FactoryBot::Syntax::Methods
 
@@ -78,4 +87,4 @@ Shoulda::Matchers.configure do |config|
   end
 end
 # SEE: https://github.com/thoughtbot/shoulda-matchers/issues/1167
-class ActiveModel::SecurePassword::InstanceMethodsOnActivation; end
+class ActiveModel::SecurePassword::InstanceMethodsOnActivation; end # rubocop:disable Style/ClassAndModuleChildren

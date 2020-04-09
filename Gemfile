@@ -18,6 +18,7 @@ gem 'webpacker', '~> 4.0'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec-rails', '~> 4.0.0'
+  gem 'rubocop', require: false
 end
 
 group :development do
@@ -33,7 +34,9 @@ group :test do
   gem 'factory_bot_rails', '~> 5.1'
   gem 'ffaker', '~> 2.14'
   gem 'minitest-matchers', '~> 1.4'
+  gem 'pry'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
+  gem 'simplecov', require: false
   gem 'webdrivers'
 end

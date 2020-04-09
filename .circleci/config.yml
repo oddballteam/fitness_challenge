@@ -80,8 +80,15 @@ jobs: # a collection of steps
           command: bin/rails db:schema:load --trace
 
       - run:
+          name: Rubocop
+          command: bundle exec rubocop
+
+      - run:
           name: Run tests in parallel
           command: bundle exec rspec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+      - store_artifacts:
+          path: coverage
 
       # Save test results for timing analysis
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
