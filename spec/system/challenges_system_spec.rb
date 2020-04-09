@@ -31,8 +31,6 @@ RSpec.describe 'Challenges', type: :system do # rubocop:disable Metrics/BlockLen
   it 'deletes a challenge' do
     challenge = FactoryBot.create(:challenge)
     visit root_url
-    expect(page).to have_text challenge.name
-
     click_on 'Delete'
 
     expect(page).to_not have_text challenge.name
@@ -42,11 +40,7 @@ RSpec.describe 'Challenges', type: :system do # rubocop:disable Metrics/BlockLen
     challenge = FactoryBot.create(:challenge)
     new_name = FFaker::Lorem.words(2).join(' ')
     visit root_url
-    expect(page).to have_text challenge.name
-
     click_on 'Edit'
-    expect(page).to have_text challenge.name
-
     fill_in 'Name', with: new_name
     click_on 'Update Challenge'
 

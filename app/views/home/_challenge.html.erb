@@ -23,6 +23,9 @@
       <p class="text-gray-700 text-base">
         <%= challenge.description %>
       </p>
+      <p class="text-gray-700 text-sm">
+        Units: <%= challenge.unit %>
+      </p>
     </div>
     <div class="flex items-center">
       <img class="w-10 h-10 rounded-full mr-4" src="https://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(challenge.user.email) %>?s=40" alt="Trophy">
