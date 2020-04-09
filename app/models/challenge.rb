@@ -7,7 +7,7 @@ class Challenge < ApplicationRecord
 
   belongs_to :user
 
-  def initialize(*_args)
+  def initialize(*_args) # rubocop:disable Lint/UnderscorePrefixedVariableName
     super(*_args)
     self.unit ||= 'set'
   end
