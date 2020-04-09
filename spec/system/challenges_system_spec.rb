@@ -29,7 +29,7 @@ RSpec.describe 'Challenges', type: :system do # rubocop:disable Metrics/BlockLen
   end
 
   it 'deletes a challenge' do
-    challenge = FactoryBot.create(:challenge)
+    FactoryBot.create(:challenge)
     visit root_url
     click_on 'Delete'
 
@@ -37,7 +37,7 @@ RSpec.describe 'Challenges', type: :system do # rubocop:disable Metrics/BlockLen
   end
 
   it 'edits a challenge' do
-    challenge = FactoryBot.create(:challenge)
+    FactoryBot.create(:challenge)
     new_name = FFaker::Lorem.words(2).join(' ')
     visit root_url
     click_on 'Edit'
