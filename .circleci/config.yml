@@ -80,6 +80,10 @@ jobs: # a collection of steps
           command: bin/rails db:schema:load --trace
 
       - run:
+          name: Rubocop
+          command: bin/rubocop
+
+      - run:
           name: Run tests in parallel
           command: bundle exec rspec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
