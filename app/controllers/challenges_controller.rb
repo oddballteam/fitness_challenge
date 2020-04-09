@@ -6,7 +6,9 @@ class ChallengesController < ApplicationController
   end
 
   def create
-    @challenge = Challenge.create(challenge_params.merge(user_id: current_user.id))
+    @challenge = Challenge.create(
+      challenge_params.merge(user_id: current_user.id)
+    )
     redirect_to root_path
   end
 

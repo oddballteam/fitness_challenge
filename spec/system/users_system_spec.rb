@@ -24,7 +24,7 @@ RSpec.describe 'New User', type: :system do
   end
 end
 
-RSpec.describe 'Existing User', type: :system do
+RSpec.describe 'Existing User', type: :system do # rubocop:disable Metrics/BlockLength
   let(:user) { FactoryBot.create(:user) }
   let(:new_pass) { FFaker::Internet.password }
 

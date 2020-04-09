@@ -8,6 +8,7 @@ class Challenge < ApplicationRecord
   belongs_to :user
 
   def initialize(*_args)
+    super(*_args)
     self.unit ||= 'set'
   end
 end
