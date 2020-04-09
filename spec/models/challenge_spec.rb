@@ -3,27 +3,20 @@
 require 'rails_helper'
 
 RSpec.describe Challenge do
-  let(:user) { FactoryBot.create(:user) }
-  subject { FactoryBot.build(:challenge) }
+  describe '.init' do
+    context 'unit is unset' do
+      subject { FactoryBot.build(:challenge, unit: nil) }
 
-  it 'is valid with valid attributes' do
-    expect(subject).to be_valid
+      it 'init sets default unit to "set"' do
+        expect(subject.unit).to eq 'set'
+      end
+    end
+
+    context 'unit is set' do
+      subject { FactoryBot.build(:challenge) }
+      it 'init sets unit' do
+        expect(subject.unit).to eq 'rounds'
+      end
+    end
   end
-
-  it 'is not valid without a name' do
-    subject.name = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'is not valid without a start_date' do
-    subject.start_date = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'is not valid without a end_date' do
-    subject.end_date = nil
-    expect(subject).to_not be_valid
-  end
-
-  it { should belong_to(:user).without_validating_presence }
 end

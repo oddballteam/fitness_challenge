@@ -33,7 +33,9 @@ group :test do
   gem 'factory_bot_rails', '~> 5.1'
   gem 'ffaker', '~> 2.14'
   gem 'minitest-matchers', '~> 1.4'
+  gem 'pry'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
+  gem 'simplecov', require: false
   gem 'webdrivers'
 end

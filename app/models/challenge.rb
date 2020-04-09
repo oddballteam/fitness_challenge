@@ -7,9 +7,7 @@ class Challenge < ApplicationRecord
 
   belongs_to :user
 
-  after_initialize :init
-
-  def init
+  def initialize(*_args)
     self.unit ||= 'set'
   end
 end
