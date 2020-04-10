@@ -35,7 +35,10 @@ class ChallengesController < ApplicationController
 
   def show
     @challenge = Challenge.find(params[:id])
-    @challenge_entries = ChallengeEntry.where(user_id: current_user.id, challenge_id: @challenge.id)
+    @challenge_entries = ChallengeEntry.where(
+      user_id: current_user.id,
+      challenge_id: @challenge.id
+    )
   end
 
   private
