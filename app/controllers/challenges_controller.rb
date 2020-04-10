@@ -39,6 +39,10 @@ class ChallengesController < ApplicationController
       user_id: current_user.id,
       challenge_id: @challenge.id
     )
+    @challenge_todays_entries = ChallengeEntry.where(
+      challenge_id: @challenge.id,
+      completed_date: Date.today
+    ).where.not(user_id: current_user.id)
   end
 
   private
