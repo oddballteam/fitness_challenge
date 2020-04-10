@@ -27,12 +27,12 @@ class ChallengeEntriesController < ApplicationController
     end
   end
 
-  # def destroy
-  #   @challenge = Challenge.find(params[:id])
-  #   @challenge.destroy
+  def destroy
+    @challenge_entry = ChallengeEntry.find(params[:id])
+    @challenge_entry.destroy
 
-  #   redirect_to root_path
-  # end
+    redirect_to challenge_path(@challenge_entry.challenge_id)
+  end
 
   # def show
   #   @challenge = Challenge.find(params[:id])

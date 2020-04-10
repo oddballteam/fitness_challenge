@@ -2,48 +2,64 @@
 
 require 'rails_helper'
 
-RSpec.describe 'ChallengeEntries', type: :system do
+RSpec.describe 'ChallengeEntries', type: :system do # rubocop:disable Metrics/BlockLength
   let(:user) { FactoryBot.create(:user) }
   let!(:challenge) { FactoryBot.create(:challenge, user: user) }
-  let(:amount) { rand(100) }
 
-  before(:each) do
-    login_as(user, scope: :user, run_callbacks: false)
-    visit root_url
-  end
+  context 'new' do
+    let(:entry) do
+      FactoryBot.build(:challenge_entry, challenge: challenge, user: user)
+    end
 
-  it 'adds an entry' do
-    date = Date.today
+    before(:each) do
+      login_as(user, scope: :user, run_callbacks: false)
+      visit root_url
+    end
 
-    click_on challenge.name
+    it 'add' do
+      click_on challenge.name
 
-    click_on 'Add Entry'
+      click_on 'Add Entry'
 
-    fill_in 'Amount', with: amount
-    fill_in 'Completed date', with: date
-    click_on 'Create Challenge entry'
+      fill_in 'Amount', with: entry.amount
+      fill_in 'Completed date', with: entry.completed_date
+      click_on 'Create Challenge entry'
 
-    expect(page).to have_text amount
-    expect(page).to have_text date
-  end
-
-  context 'entry exists' do
-    let!(:entry) { FactoryBot.create(:challenge_entry, challenge: challenge) }
-
-    it 'edits an entry' do
-      visit challenge_path(challenge)
       expect(page).to have_text entry.amount
+      expect(page).to have_text entry.completed_date
+    end
+  end
 
+  context 'exists' do
+    let(:new_amount) { rand(100) }
+    let!(:entry) do
+      FactoryBot.create(:challenge_entry, challenge: challenge, user: user)
+    end
+
+    before(:each) do
+      login_as(user, scope: :user, run_callbacks: false)
+      visit challenge_path(challenge)
+    end
+
+    it 'edit' do
       within "#entry-#{entry.id}" do
         click_on 'Edit'
-        fill_in 'Amount', with: amount
-        click_on 'Update Challenge entry'
+      end
 
-        expect(page).to have_text amount
+      fill_in 'Amount', with: new_amount
+      click_on 'Update Challenge entry'
+
+      within "#entry-#{entry.id}" do
+        expect(page).to have_text new_amount
       end
     end
 
-    it 'deletes an entry' do
+    it 'delete' do
+      within "#entry-#{entry.id}" do
+        click_on 'Delete'
+      end
+
+      expect(page).to_not have_selector "#entry-#{entry.id}"
     end
   end
 end
