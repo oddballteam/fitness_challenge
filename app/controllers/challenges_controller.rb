@@ -42,7 +42,7 @@ class ChallengesController < ApplicationController
     @challenge_todays_entries = ChallengeEntry.where(
       challenge_id: @challenge.id,
       completed_date: Date.today
-    ).where.not(user_id: current_user.id)
+    ).order('amount DESC')
   end
 
   private

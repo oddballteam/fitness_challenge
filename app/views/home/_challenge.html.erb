@@ -27,6 +27,8 @@
         <p class="text-gray-700 text-base">
           <%= link_to "View More", challenge, class: "cursor-pointer inline-block bg-oddball hover:bg-oddball-lighter text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline cursor-pointer text-sm" %>
         </p>
+      <% else %>
+        <p class="text-gray-700 text-base"><%= challenge.description %></p>
       <% end %>
     </div>
     <div class="flex items-center">

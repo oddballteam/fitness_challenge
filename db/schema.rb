@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_10_115246) do
+ActiveRecord::Schema.define(version: 2020_04_10_194950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "challenge_entries", force: :cascade do |t|
-    t.string "amount", null: false
+    t.float "amount", null: false
     t.datetime "completed_date", null: false
     t.bigint "user_id"
     t.bigint "challenge_id"

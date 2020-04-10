@@ -14,7 +14,7 @@
             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Completed Date</th>
           </tr>
         </thead>
-        <tbody>
+          <tbody>
           <%= render partial: 'todays_entries', collection: @challenge_todays_entries %>
         </tbody>
       </table>
@@ -38,6 +38,12 @@
         <tbody>
           <%= render partial: 'entry', collection: @challenge_entries %>
         </tbody>
+        <tfoot>
+          <tr>
+            <td class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Total:</td>
+            <td class="py-4 px-6 bg-grey-lightest text-sm text-grey-dark border-b border-grey-light"><%= @challenge_entries.map(&:amount).sum %></td>
+          </tr>
+        </tfoot>
       </table>
     </div>
     <div class="flex justify-end items-center">
