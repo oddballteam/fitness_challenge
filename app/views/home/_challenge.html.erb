@@ -16,16 +16,13 @@
         <% end %>
       </div>
       <div class="text-gray-900 font-bold text-xl">
-        <%= challenge.name %>
+        <%= link_to "#{challenge.name}", challenge, class: "hover:underline cursor-pointer" %>
       </div>
       <p class="text-gray-600 mb-2">
         <%= challenge.start_date.strftime("%B %d, %Y") %> - <%= challenge.end_date.strftime("%B %d, %Y") %>
       </p>
       <p class="text-gray-700 text-base">
         <%= challenge.description %>
-      </p>
-      <p class="text-gray-700 text-sm">
-        Units: <%= challenge.unit %>
       </p>
     </div>
     <div class="flex items-center">

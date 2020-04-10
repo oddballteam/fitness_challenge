@@ -1,0 +1,50 @@
+# frozen_string_literal: true
+
+class ChallengeEntriesController < ApplicationController
+  def new
+    @challenge_entry = ChallengeEntry.new
+    @challenge_entry.challenge_id = params[:challenge_id]
+  end
+
+  def create
+    @challenge_entry = ChallengeEntry.create(
+      challenge_entry_params.merge(user_id: current_user.id)
+    )
+    redirect_to challenge_path(@challenge_entry.challenge_id)
+  end
+
+  # def edit
+  #   @challenge = Challenge.find(params[:id])
+  # end
+
+  # def update
+  #   @challenge = Challenge.find(params[:id])
+
+  #   if @challenge.update(challenge_params)
+  #     redirect_to root_path
+  #   else
+  #     render 'edit'
+  #   end
+  # end
+
+  # def destroy
+  #   @challenge = Challenge.find(params[:id])
+  #   @challenge.destroy
+
+  #   redirect_to root_path
+  # end
+
+  # def show
+  #   @challenge = Challenge.find(params[:id])
+  # end
+
+  # private
+
+  def challenge_entry_params
+    params.require(:challenge_entry).permit(
+      :amount,
+      :completed_date,
+      :challenge_id
+    )
+  end
+end

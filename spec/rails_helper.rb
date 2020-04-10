@@ -16,6 +16,7 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 require 'capybara/rspec'
+require 'capybara-screenshot/rspec'
 require 'email_spec'
 require 'email_spec/rspec'
 
@@ -88,3 +89,7 @@ Shoulda::Matchers.configure do |config|
 end
 # SEE: https://github.com/thoughtbot/shoulda-matchers/issues/1167
 class ActiveModel::SecurePassword::InstanceMethodsOnActivation; end # rubocop:disable Style/ClassAndModuleChildren
+
+Capybara::Screenshot.autosave_on_failure = false
+Capybara.asset_host = 'http://localhost:3000'
+Capybara::Screenshot.webkit_options = { width: 1280, height: 1024 }

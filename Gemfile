@@ -30,6 +30,7 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
+  gem 'capybara-screenshot'
   gem 'email_spec', '~> 2.2'
   gem 'factory_bot_rails', '~> 5.1'
   gem 'ffaker', '~> 2.14'

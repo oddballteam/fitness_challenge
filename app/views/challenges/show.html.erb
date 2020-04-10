@@ -1,0 +1,6 @@
+<div class="w-full max-w-m">
+  <%= render partial: 'home/challenge', collection: [@challenge] %>
+  <%= render partial: 'entry', collection: @challenge_entries %>
+
+  <%= link_to "Add Entry", new_challenge_entry_path(challenge_id: @challenge), class: "inline-block bg-oddball hover:bg-oddball-lighter text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer mt-5" %>
+</div>

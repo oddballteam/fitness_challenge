@@ -46,4 +46,15 @@ RSpec.describe 'Challenges', type: :system do # rubocop:disable Metrics/BlockLen
 
     expect(page).to have_text new_name
   end
+
+  it 'shows a challenge' do
+    challenge = FactoryBot.create(:challenge)
+
+    visit root_url
+
+    click_on challenge.name
+
+    expect(page).to have_text challenge.name
+    expect(page).to have_text 'Add Entry'
+  end
 end
