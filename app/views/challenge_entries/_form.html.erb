@@ -1,11 +1,14 @@
 <%= form_for(@challenge_entry, html: { class: "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" } ) do |f| %>
+
     <div class="mb-4">
       <h2 class="text-2xl">
-        <%= @challenge_entry.persisted? ? "Update \"#{@challenge_entry.name}\"" : 'Create a Challenge Entry'%>
+        <%= @challenge_entry.persisted? ? "Edit Entry for \"#{@challenge_entry.challenge.name}\"" : "Create Entry for \"#{@challenge_entry.challenge.name}\"" %>
       </h2>
     </div>
 
-    <%= f.hidden_field :challenge_id, value: params[:challenge_id] %>
+    <% if !@challenge_entry.persisted? %>
+      <%= f.hidden_field :challenge_id, value: params[:challenge_id] %>
+    <% end %>
 
     <div class="mb-4">
       <%= f.label :amount, class: "block text-gray-700 text-sm font-bold mb-2" %>
@@ -19,7 +22,8 @@
         data: {
           controller: "flatpickr",
           flatpickr_date_format: "%B %d, %Y",
-          flatpickr_min_date: Time.zone.now
+          flatpickr_min_date: @challenge_entry.challenge.start_date,
+          flatpickr_max_date: Time.zone.now
         } %>
         <div class="absolute px-3 py-2" style="top: 27px; right: 10px;">
             <svg class="h-6 w-6 text-gray-400"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -31,6 +35,6 @@
 
     <div class="mb-4 flex items-center justify-center">
       <%= f.submit class: "bg-oddball hover:bg-oddball-lighter text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" %>
-      <%# <%= link_to "Cancel", challenge_path(@challenge_entry.challenge), class: "inline-block align-baseline text-sm text-gray-500 hover:text-gray-800 ml-10" %>
+      <%= link_to "Cancel", challenge_path(@challenge_entry.challenge), class: "inline-block align-baseline text-sm text-gray-500 hover:text-gray-800 ml-10" %>
     </div>
   <% end %>

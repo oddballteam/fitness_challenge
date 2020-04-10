@@ -13,19 +13,19 @@ class ChallengeEntriesController < ApplicationController
     redirect_to challenge_path(@challenge_entry.challenge_id)
   end
 
-  # def edit
-  #   @challenge = Challenge.find(params[:id])
-  # end
+  def edit
+    @challenge_entry = ChallengeEntry.find(params[:id])
+  end
 
-  # def update
-  #   @challenge = Challenge.find(params[:id])
+  def update
+    @challenge_entry = ChallengeEntry.find(params[:id])
 
-  #   if @challenge.update(challenge_params)
-  #     redirect_to root_path
-  #   else
-  #     render 'edit'
-  #   end
-  # end
+    if @challenge_entry.update(challenge_entry_params)
+      redirect_to challenge_path(@challenge_entry.challenge_id)
+    else
+      render 'edit'
+    end
+  end
 
   # def destroy
   #   @challenge = Challenge.find(params[:id])

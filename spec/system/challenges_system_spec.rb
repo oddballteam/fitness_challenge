@@ -7,7 +7,9 @@ RSpec.describe 'Challenges', type: :system do # rubocop:disable Metrics/BlockLen
   let(:challenge) { FactoryBot.build(:challenge) }
 
   before(:each) do
-    sign_in_as(user)
+    login_as(user, scope: :user, run_callbacks: false)
+    visit root_url
+    # sign_in_as(user)
   end
 
   it 'saves a challenge' do
