@@ -34,7 +34,8 @@ RSpec.describe 'ChallengeEntries', type: :system do
 
     visit root_url
     click_on challenge.name
-    expect(page).to have_text entry.amount
+    # expect(page).to have_text entry.amount
+    expect(page).to have_css('.amount', text: entry.amount)
 
     click_on 'Edit'
     fill_in 'Amount', with: amount
