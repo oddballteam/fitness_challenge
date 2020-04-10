@@ -19,7 +19,7 @@ RSpec.describe 'ChallengeEntries', type: :system do # rubocop:disable Metrics/Bl
     it 'add' do
       click_on challenge.name
 
-      click_on 'Add Entry'
+      first(:link, 'Add Entry').click
 
       fill_in 'Amount', with: entry.amount
       fill_in 'Completed date', with: entry.completed_date

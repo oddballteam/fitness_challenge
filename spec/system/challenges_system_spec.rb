@@ -26,7 +26,6 @@ RSpec.describe 'Challenges', type: :system do # rubocop:disable Metrics/BlockLen
       click_on 'Create Challenge'
 
       expect(page).to have_text challenge.name
-      expect(page).to have_text challenge.description
       expect(page).to have_text challenge.start_date.strftime('%B %d, %Y')
       expect(page).to have_text challenge.end_date.strftime('%B %d, %Y')
     end

@@ -1,6 +1,6 @@
 <div class="w-full max-w-m">
   <div class="flex justify-center mb-10">
-    <%= render partial: 'home/challenge', collection: [@challenge] %>
+    <%= render partial: 'home/challenge', collection: [@challenge], locals: { view_more: false } %>
   </div>
 
   <div class="w-2/3 mx-auto">
@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div class="w-2/3 mx-auto">
+  <div id="your-entries" class="w-2/3 mx-auto">
     <div class="flex justify-between items-center">
       <h2 class="text-2xl mb-0">Your Entries</h2>
       <%= link_to "Add Entry", new_challenge_entry_path(challenge_id: @challenge), class: "inline-block bg-oddball hover:bg-oddball-lighter text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" %>
