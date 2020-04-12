@@ -1,4 +1,4 @@
-<tr id="entry-<%= todays_entries.id %>" class="hover:bg-grey-lighter">
+<tr id="today-entry-<%= todays_entries.id %>" class="hover:bg-grey-lighter">
   <td class="amount py-4 px-6 border-b border-grey-light">
     <img class="w-10 h-10 rounded-full mr-4" src="https://www.gravatar.com/avatar/<%= Digest::MD5.hexdigest(todays_entries.user.email) %>?s=40" alt="Trophy">
   </td>
