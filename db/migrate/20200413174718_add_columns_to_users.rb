@@ -1,9 +1,9 @@
 class AddColumnsToUsers < ActiveRecord::Migration[6.0]
   def change
-    add_column :users, :name, :string, null: false
-    add_column :users, :provider, :string, null: false
-    add_column :users, :uid, :string, null: false
-    add_column :users, :remember_token, :string, null: false
+    add_column :users, :name, :string
+    add_column :users, :provider, :string
+    add_column :users, :uid, :string
+    add_column :users, :remember_token, :string
 
     add_index :users, [:uid, :provider], unique: true
   end

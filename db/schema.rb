@@ -42,10 +42,10 @@ ActiveRecord::Schema.define(version: 2020_04_13_174718) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "name", null: false
-    t.string "provider", null: false
-    t.string "uid", null: false
-    t.string "remember_token", null: false
+    t.string "name"
+    t.string "provider"
+    t.string "uid"
+    t.string "remember_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
