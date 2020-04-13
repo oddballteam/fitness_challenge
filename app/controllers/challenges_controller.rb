@@ -33,6 +33,18 @@ class ChallengesController < ApplicationController
     redirect_to root_path
   end
 
+  def show
+    @challenge = Challenge.find(params[:id])
+    @challenge_entries = ChallengeEntry.where(
+      user_id: current_user.id,
+      challenge_id: @challenge.id
+    )
+    @challenge_todays_entries = ChallengeEntry.where(
+      challenge_id: @challenge.id,
+      completed_date: Date.today
+    ).order('amount DESC')
+  end
+
   private
 
   def challenge_params
