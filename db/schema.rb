@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_04_13_201618) do
+=======
+ActiveRecord::Schema.define(version: 2020_04_13_174718) do
+>>>>>>> 3614de9... Add migration to update users
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
