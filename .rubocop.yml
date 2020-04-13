@@ -6,6 +6,7 @@ AllCops:
     - vendor/**/*
     - .git/**/*
     - bin/**/*
+    - app/controllers/users/omniauth_callbacks_controller.rb
 
 Style/Documentation:
   Enabled: false
