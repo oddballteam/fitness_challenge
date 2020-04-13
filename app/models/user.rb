@@ -15,7 +15,8 @@ class User < ApplicationRecord
     # created if they don't exist
     user ||= User.create(name: data['name'],
                          email: data['email'],
-                         password: Devise.friendly_token[0, 20])
+                         password: Devise.friendly_token[0, 20],
+                         picture: data['image'])
     user
   end
 end
