@@ -34,12 +34,39 @@ en:
     cancel: Cancel
   challenge_entries:
     form_title: "%{action} Entry for %{name}"
+  challenge:
+    form_title: "%{action} %{name}"
+    todays_entries:
+      title: "Today's Entries"
+      user: "User"
+      amount: "Amount"
+      completed_date: "Completed Date"
+    your_entries:
+      title: "Your Entries"
+      add: "Add Entry"
+      amount: "Amount"
+      completed_date: "Completed Date"
+      actions: "Actions"
+      total: "Total:"
   helpers:
+    actions:
+      cancel: "Cancel"
+      delete: "Delete"
+      edit: "Edit"
     label:
       challenge_entry:
         amount: "Amount"
-        completed_date: "Completed date"
+        completed_date: "Completed Date"
+      challenge:
+        name: "Name"
+        description: "Description"
+        start_date: "Start Date"
+        end_date: "End Date"
+        unit: "Unit"
     submit:
       challenge_entry:
         create: "Create Entry"
         update: "Update Entry"
+      challenge:
+        create: "Create Challenge"
+        update: "Update Challenge"

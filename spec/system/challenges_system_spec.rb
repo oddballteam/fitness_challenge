@@ -16,14 +16,12 @@ RSpec.describe 'Challenges', type: :system do # rubocop:disable Metrics/BlockLen
     it 'add' do
       click_on 'Create Challenge'
 
-      expect(page).to have_text 'Create a Challenge'
-
-      fill_in 'Name', with: challenge.name
-      fill_in 'Description', with: challenge.description
-      fill_in 'Start date', with: challenge.start_date
-      fill_in 'End date', with: challenge.end_date
-      fill_in 'Unit', with: challenge.unit
-      click_on 'Create Challenge'
+      fill_in I18n.t('helpers.label.challenge.name'), with: challenge.name
+      fill_in I18n.t('helpers.label.challenge.description'), with: challenge.description
+      fill_in I18n.t('helpers.label.challenge.start_date'), with: challenge.start_date
+      fill_in I18n.t('helpers.label.challenge.end_date'), with: challenge.end_date
+      fill_in I18n.t('helpers.label.challenge.unit'), with: challenge.unit
+      click_on I18n.t('helpers.submit.challenge.create')
 
       expect(page).to have_text challenge.name
       expect(page).to have_text challenge.start_date.strftime('%B %d, %Y')
@@ -43,18 +41,18 @@ RSpec.describe 'Challenges', type: :system do # rubocop:disable Metrics/BlockLen
       new_name = FFaker::Lorem.words(2).join(' ')
 
       within "#challenge-#{challenge.id}" do
-        click_on 'Edit'
+        click_on I18n.t('helpers.actions.edit')
       end
 
-      fill_in 'Name', with: new_name
-      click_on 'Update Challenge'
+      fill_in I18n.t('helpers.label.challenge.name'), with: new_name
+      click_on I18n.t('helpers.submit.challenge.update')
 
       expect(page).to have_text new_name
     end
 
     it 'delete' do
       within "#challenge-#{challenge.id}" do
-        click_on 'Delete'
+        click_on I18n.t('helpers.actions.delete')
       end
 
       expect(page).to_not have_text challenge.name
@@ -64,7 +62,7 @@ RSpec.describe 'Challenges', type: :system do # rubocop:disable Metrics/BlockLen
       click_on challenge.name
 
       expect(page).to have_text challenge.name
-      expect(page).to have_text 'Add Entry'
+      expect(page).to have_text I18n.t('challenge.your_entries.add')
     end
   end
 end
