@@ -30,17 +30,18 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  forms:
-    cancel: Cancel
   challenge_entries:
     form_title: "%{action} Entry for %{name}"
   challenge:
+    add: "Add Challenge"
     form_title: "%{action} %{name}"
+    title: "Challenges"
     todays_entries:
       title: "Today's Entries"
       user: "User"
       amount: "Amount"
       completed_date: "Completed Date"
+    view_more: "View More"
     your_entries:
       title: "Your Entries"
       add: "Add Entry"

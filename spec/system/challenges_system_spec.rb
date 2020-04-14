@@ -14,7 +14,7 @@ RSpec.describe 'Challenges', type: :system do # rubocop:disable Metrics/BlockLen
     end
 
     it 'add' do
-      click_on 'Create Challenge'
+      click_on I18n.t('challenge.add')
 
       fill_in I18n.t('helpers.label.challenge.name'), with: challenge.name
       fill_in I18n.t('helpers.label.challenge.description'), with: challenge.description
