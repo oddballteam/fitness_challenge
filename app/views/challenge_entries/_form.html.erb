@@ -2,7 +2,7 @@
 
     <div class="mb-4">
       <h2 class="text-2xl">
-        <%= @challenge_entry.persisted? ? "Edit Entry for \"#{@challenge_entry.challenge.name}\"" : "Create Entry for \"#{@challenge_entry.challenge.name}\"" %>
+        <%= t('challenge_entries.form_title', name: @challenge_entry.challenge.name, action: action_name.humanize) %>
       </h2>
     </div>
 
@@ -35,6 +35,6 @@
 
     <div class="mb-4 flex items-center justify-center">
       <%= f.submit class: "bg-oddball hover:bg-oddball-lighter text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" %>
-      <%= link_to "Cancel", challenge_path(@challenge_entry.challenge), class: "inline-block align-baseline text-sm text-gray-500 hover:text-gray-800 ml-10" %>
+      <%= link_to t('forms.cancel'), challenge_path(@challenge_entry.challenge), class: "inline-block align-baseline text-sm text-gray-500 hover:text-gray-800 ml-10" %>
     </div>
   <% end %>
