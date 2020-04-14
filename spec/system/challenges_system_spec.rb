@@ -16,11 +16,16 @@ RSpec.describe 'Challenges', type: :system do # rubocop:disable Metrics/BlockLen
     it 'add' do
       click_on I18n.t('challenge.add')
 
-      fill_in I18n.t('helpers.label.challenge.name'), with: challenge.name
-      fill_in I18n.t('helpers.label.challenge.description'), with: challenge.description
-      fill_in I18n.t('helpers.label.challenge.start_date'), with: challenge.start_date
-      fill_in I18n.t('helpers.label.challenge.end_date'), with: challenge.end_date
-      fill_in I18n.t('helpers.label.challenge.unit'), with: challenge.unit
+      fill_in I18n.t('helpers.label.challenge.name'),
+              with: challenge.name
+      fill_in I18n.t('helpers.label.challenge.description'),
+              with: challenge.description
+      fill_in I18n.t('helpers.label.challenge.start_date'),
+              with: challenge.start_date
+      fill_in I18n.t('helpers.label.challenge.end_date'),
+              with: challenge.end_date
+      fill_in I18n.t('helpers.label.challenge.unit'),
+              with: challenge.unit
       click_on I18n.t('helpers.submit.challenge.create')
 
       expect(page).to have_text challenge.name
