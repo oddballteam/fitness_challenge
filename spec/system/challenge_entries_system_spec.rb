@@ -21,9 +21,11 @@ RSpec.describe 'ChallengeEntries', type: :system do # rubocop:disable Metrics/Bl
 
       first(:link, 'Add Entry').click
 
-      fill_in 'Amount', with: entry.amount
-      fill_in 'Completed date', with: entry.completed_date
-      click_on 'Create Challenge entry'
+      fill_in I18n.t('helpers.label.challenge_entry.amount'),
+              with: entry.amount
+      fill_in I18n.t('helpers.label.challenge_entry.completed_date'),
+              with: entry.completed_date
+      click_on I18n.t('helpers.submit.challenge_entry.create')
 
       expect(page).to have_text entry.amount
       expect(page).to have_text entry.completed_date
@@ -43,11 +45,11 @@ RSpec.describe 'ChallengeEntries', type: :system do # rubocop:disable Metrics/Bl
 
     it 'edit' do
       within "#entry-#{entry.id}" do
-        click_on 'Edit'
+        click_on I18n.t('helpers.actions.edit')
       end
 
-      fill_in 'Amount', with: new_amount
-      click_on 'Update Challenge entry'
+      fill_in I18n.t('helpers.label.challenge_entry.amount'), with: new_amount
+      click_on I18n.t('helpers.submit.challenge_entry.update')
 
       within "#entry-#{entry.id}" do
         expect(page).to have_text new_amount
@@ -56,7 +58,7 @@ RSpec.describe 'ChallengeEntries', type: :system do # rubocop:disable Metrics/Bl
 
     it 'delete' do
       within "#entry-#{entry.id}" do
-        click_on 'Delete'
+        click_on I18n.t('helpers.actions.delete')
       end
 
       expect(page).to_not have_selector "#entry-#{entry.id}"
