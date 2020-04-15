@@ -30,7 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  app_title: "Oddball Fitness Challenge"
+  app_title: "Fitness Challenge"
   challenge_entries:
     form_title: "%{action} Entry for %{name}"
   challenge:
@@ -55,6 +55,7 @@ en:
       cancel: "Cancel"
       delete: "Delete"
       edit: "Edit"
+      sign_in_with_google: "Sign in with Google"
     label:
       challenge_entry:
         amount: "Amount"
