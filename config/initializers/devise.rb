@@ -25,4 +25,14 @@ Devise.setup do |config|
   config.reset_password_within = 6.hours
 
   config.sign_out_via = :delete
+
+  config.omniauth :google_oauth2,
+                  ENV['GOOGLE_CLIENT_ID'],
+                  ENV['GOOGLE_CLIENT_SECRET'],
+                  {
+                    scope: 'userinfo.email, userinfo.profile',
+                    prompt: 'select_account',
+                    image_aspect_ratio: 'square',
+                    image_size: 200
+                  }
 end
