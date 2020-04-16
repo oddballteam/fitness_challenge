@@ -14,7 +14,7 @@ class User < ApplicationRecord
     user ||= User.create(name: data['name'],
                          email: data['email'],
                          password: Devise.friendly_token[0, 20],
-                         picture: data['extra']['raw_info']['picture'])
+                         picture: data.dig('extra', 'raw_info', 'picture')
     user
   end
 end
