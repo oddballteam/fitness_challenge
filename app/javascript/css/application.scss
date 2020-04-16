@@ -3,21 +3,23 @@
 @tailwind utilities;
 
 .flash-success {
-  background-color: theme("colors.green.100");
-  color: theme("colors.green.500");
-  border: 1px solid theme("colors.green.500");
+  @apply .bg-green-100;
+  @apply .text-green-500;
+  @apply .border-green-500;
+  @apply .border;
 
   svg {
-    color: theme("colors.green.500");
+    @apply .text-green-500;
   }
 }
 
 .flash-error {
-  background-color: theme("colors.red.100");
-  color: theme("colors.red.500");
-  border: 1px solid theme("colors.red.500");
+  @apply .bg-red-100;
+  @apply .text-red-500;
+  @apply .border-red-500;
+  @apply .border;
 
   svg {
-    color: theme("colors.red.500");
+    @apply .text-red-500;
   }
 }
