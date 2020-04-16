@@ -23,3 +23,15 @@
     @apply .text-red-500;
   }
 }
+
+.flash-notice,
+.flash-alert {
+  @apply .bg-oddball-bg;
+  @apply .text-oddball;
+  @apply .border-oddball;
+  @apply .border;
+
+  svg {
+    @apply .text-oddball;
+  }
+}
