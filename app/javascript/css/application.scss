@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.flash-success {
+  @apply .bg-green-100;
+  @apply .text-green-500;
+  @apply .border-green-500;
+  @apply .border;
+
+  svg {
+    @apply .text-green-500;
+  }
+}
+
+.flash-error {
+  @apply .bg-red-100;
+  @apply .text-red-500;
+  @apply .border-red-500;
+  @apply .border;
+
+  svg {
+    @apply .text-red-500;
+  }
+}

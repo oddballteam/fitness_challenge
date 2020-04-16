@@ -6,10 +6,17 @@ class ChallengesController < ApplicationController
   end
 
   def create
-    @challenge = Challenge.create(
+    @challenge = Challenge.new(
       challenge_params.merge(user_id: current_user.id)
     )
-    redirect_to root_path
+
+    if @challenge.save
+      redirect_to root_path, success: t(
+        'helpers.flash.create_success', name: @challenge.name
+      )
+    else
+      render 'new', error: t('helpers.flash.create_error', name: 'challenge')
+    end
   end
 
   def edit
@@ -20,15 +27,24 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
 
     if @challenge.update(challenge_params)
-      redirect_to root_path
+      redirect_to root_path, success: t(
+        'helpers.flash.update_success', name: @challenge.name
+      )
     else
-      render 'edit'
+      render 'edit', error: t('helpers.flash.update_failure', name: 'challenge')
     end
   end
 
   def destroy
     @challenge = Challenge.find(params[:id])
-    @challenge.destroy
+
+    if @challenge.destroy
+      flash[:success] = t(
+        'helpers.flash.destroy_success', name: @challenge.name
+      )
+    else
+      flash[:error] = t('helpers.flash.destroy_failure', name: 'challenge')
+    end
 
     redirect_to root_path
   end

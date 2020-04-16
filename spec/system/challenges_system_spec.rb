@@ -34,7 +34,7 @@ RSpec.describe 'Challenges', type: :system do # rubocop:disable Metrics/BlockLen
     end
   end
 
-  context 'exists' do
+  context 'exists' do # rubocop:disable Metrics/BlockLength
     let!(:challenge) { FactoryBot.create(:challenge, user: user) }
 
     before(:each) do
@@ -60,14 +60,14 @@ RSpec.describe 'Challenges', type: :system do # rubocop:disable Metrics/BlockLen
         click_on I18n.t('helpers.actions.delete')
       end
 
-      expect(page).to_not have_text challenge.name
+      expect(page).to have_text I18n.t(
+        'helpers.flash.destroy_success', name: challenge.name
+      )
     end
 
     it 'show' do
       click_on challenge.name
-
       expect(page).to have_text challenge.name
-      expect(page).to have_text I18n.t('challenge.your_entries.add')
     end
   end
 end
