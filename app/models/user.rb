@@ -9,13 +9,12 @@ class User < ApplicationRecord
 
   def self.from_omniauth(access_token)
     data = access_token.info
-    puts "8=====> data: #{data.inspect}"
     user = User.where(email: data['email']).first
 
     user ||= User.create(name: data['name'],
                          email: data['email'],
                          password: Devise.friendly_token[0, 20],
-                         picture: data.dig('extra', 'raw_info', 'picture'))
+                         picture: data.dig('image'))
     user
   end
 end
