@@ -13,6 +13,12 @@ local:
 #   region: us-east-1
 #   bucket: your_own_bucket
 
+amazon:
+  service: S3
+  bucket: <%= ENV['AWS_BUCKET'] %>
+  upload:
+    server_side_encryption: "AES256" # 'aws:kms' or 'AES256'
+
 # Remember not to checkin your GCS keyfile to a repository
 # google:
 #   service: GCS
