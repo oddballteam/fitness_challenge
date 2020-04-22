@@ -8,4 +8,6 @@ class Challenge < ApplicationRecord
   belongs_to :user
 
   attribute :unit, :string, default: 'set'
+
+  has_one_attached :trophy
 end
