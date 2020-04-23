@@ -2,11 +2,11 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Challenges', type: :system do # rubocop:disable Metrics/BlockLength
+RSpec.describe 'Challenges', type: :system do
   let(:user) { FactoryBot.create(:user) }
 
   context 'new' do
-    let(:challenge) { FactoryBot.build(:challenge, user: user) }
+    let(:challenge) { FactoryBot.build(:challenge, :with_trophy, user: user) }
 
     before(:each) do
       login_as(user, scope: :user, run_callbacks: false)
@@ -34,7 +34,7 @@ RSpec.describe 'Challenges', type: :system do # rubocop:disable Metrics/BlockLen
     end
   end
 
-  context 'exists' do # rubocop:disable Metrics/BlockLength
+  context 'exists' do
     let!(:challenge) { FactoryBot.create(:challenge, user: user) }
 
     before(:each) do

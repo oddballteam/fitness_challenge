@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'ChallengeEntries', type: :system do # rubocop:disable Metrics/BlockLength
+RSpec.describe 'ChallengeEntries', type: :system do
   let(:user) { FactoryBot.create(:user) }
   let!(:challenge) { FactoryBot.create(:challenge, user: user) }
 
