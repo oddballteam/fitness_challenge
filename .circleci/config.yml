@@ -84,8 +84,8 @@ jobs: # a collection of steps
           command: bundle exec rubocop
 
       - run:
-          name: Run tests in parallel
-          command: bundle exec rspec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+          name: Run tests
+          command: bundle exec rspec
 
       - store_artifacts:
           path: coverage
