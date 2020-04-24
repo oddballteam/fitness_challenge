@@ -25,7 +25,7 @@
     <div class="flex justify-between items-center">
       <h2 class="text-2xl mb-0"><%= t('challenge.your_entries.title') %></h2>
 
-      <% if @challenge.start_date <= Date.today && @challenge.end_date >= Date.today %>
+      <% if @challenge.start_date <= Date.today && @challenge.end_date >= Date.today + 3 %>
         <%= link_to t('challenge.your_entries.add'), new_challenge_entry_path(challenge_id: @challenge), class: "inline-block bg-oddball hover:bg-oddball-lighter text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" %>
       <% end %>
     </div>
@@ -49,7 +49,7 @@
         </tfoot>
       </table>
     </div>
-    <% if @challenge.start_date <= Date.today && @challenge.end_date >= Date.today %>
+    <% if @challenge.start_date <= Date.today && @challenge.end_date >= Date.today + 3 %>
       <div class="flex justify-end items-center">
         <%= link_to t('challenge.your_entries.add'), new_challenge_entry_path(challenge_id: @challenge), class: "inline-block bg-oddball hover:bg-oddball-lighter text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" %>
       </div>
