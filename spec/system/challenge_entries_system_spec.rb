@@ -84,12 +84,10 @@ RSpec.describe 'ChallengeEntries', type: :system do
 
     context 'exists' do
       let(:new_amount) { rand(100) }
-      let(:completed_date) { rand(challenge.start_date..challenge.end_date) }
       let!(:entry) do
         FactoryBot.create(:challenge_entry,
                           challenge: challenge,
-                          user: user,
-                          completed_date: completed_date)
+                          user: user)
       end
 
       before(:each) do
