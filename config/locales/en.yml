@@ -1,4 +1,11 @@
 en:
+  activerecord:
+    errors:
+      models:
+        challenge_entry:
+          attributes:
+            completed_date:
+              should_be_during_challenge_dates: "Completed date outside of allowed dates."
   app_title: "Fitness Challenge"
   challenge_entries:
     form_title: "%{action} Entry for %{name}"
