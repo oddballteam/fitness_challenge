@@ -35,4 +35,8 @@ Devise.setup do |config|
                     image_aspect_ratio: 'square',
                     image_size: 200
                   }
+
+  config.jwt do |jwt|
+    jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
+  end
 end

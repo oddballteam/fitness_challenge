@@ -8,6 +8,7 @@ ruby '2.6.6'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise', '~> 4.7'
+gem 'devise-jwt', '~> 0.6.0'
 gem 'image_processing', '~> 1.2'
 gem 'jbuilder', '~> 2.7'
 gem 'omniauth-google-oauth2'
