@@ -7,7 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, :jwt_authenticatable,
          omniauth_providers: [:google_oauth2],
-         jwt_revocation_strategy: Blacklist
+         jwt_revocation_strategy: JwtBlacklist
 
   def self.from_omniauth(access_token)
     data = access_token.info
