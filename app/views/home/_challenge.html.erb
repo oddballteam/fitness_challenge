@@ -1,6 +1,10 @@
-<div id="challenge-<%= challenge.id %>" class="max-w-sm w-auto lg:max-w-full lg:flex">
-  <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden bg-no-repeat bg-center bg-oddball-lighter" style="background-image: url(<%= image_path('trophy.svg') %>
-); background-size: 60% auto;" title="<%= challenge.name %>">
+<div id="challenge-<%= challenge.id %>" class="max-w-sm w-auto lg:max-w-full lg:flex mb-5">
+  <div class="h-48 lg:h-auto lg:w-48 flex rounded-t lg:rounded-t-none lg:rounded-l overflow-hidden justify-center items-center bg-oddball-lighter" title="<%= challenge.name %>">
+    <% if challenge.trophy.attached? %>
+      <%= image_tag url_for(challenge.trophy.variant(resize_to_limit: [200, 200])) %>
+    <% else %>
+      <%= image_tag 'trophy.svg', width: '60%' %>
+    <% end %>
   </div>
   <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
     <div class="mb-8">
@@ -32,9 +36,9 @@
       <% end %>
     </div>
     <div class="flex items-center">
-      <img class="w-10 h-10 rounded-full mr-4" src="<%= challenge.user.picture %>" alt="<%= challenge.user.email %>">
+      <img class="w-10 h-10 rounded-full mr-3" src="<%= challenge.user.picture %>" alt="<%= challenge.user.email %>">
       <div class="text-sm">
-        <p class="text-gray-900 leading-none"><%= challenge.user.email %></p>
+        <p class="text-gray-900 leading-none"><%= t('challenge.created_by') %><%= challenge.user.name %></p>
       </div>
     </div>
   </div>

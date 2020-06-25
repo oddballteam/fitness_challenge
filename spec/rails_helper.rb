@@ -107,3 +107,7 @@ class ActiveModel::SecurePassword::InstanceMethodsOnActivation; end # rubocop:di
 Capybara::Screenshot.autosave_on_failure = false
 Capybara.asset_host = 'http://localhost:3000'
 Capybara::Screenshot.webkit_options = { width: 1280, height: 1024 }
+
+FactoryBot::SyntaxRunner.class_eval do
+  include ActionDispatch::TestProcess
+end

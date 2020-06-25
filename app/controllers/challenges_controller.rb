@@ -69,7 +69,8 @@ class ChallengesController < ApplicationController
       :description,
       :start_date,
       :end_date,
-      :unit
+      :unit,
+      :trophy
     )
   end
 end

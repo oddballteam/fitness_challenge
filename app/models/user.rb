@@ -15,6 +15,7 @@ class User < ApplicationRecord
                          email: data['email'],
                          password: Devise.friendly_token[0, 20],
                          picture: data.dig('extra', 'raw_info', 'picture')
+                        )
     user
   end
 end

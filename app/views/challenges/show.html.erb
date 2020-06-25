@@ -24,7 +24,10 @@
   <div id="your-entries" class="w-2/3 mx-auto">
     <div class="flex justify-between items-center">
       <h2 class="text-2xl mb-0"><%= t('challenge.your_entries.title') %></h2>
-      <%= link_to t('challenge.your_entries.add'), new_challenge_entry_path(challenge_id: @challenge), class: "inline-block bg-oddball hover:bg-oddball-lighter text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" %>
+
+      <% if @challenge.start_date <= Date.today && @challenge.end_date >= Date.today + 3 %>
+        <%= link_to t('challenge.your_entries.add'), new_challenge_entry_path(challenge_id: @challenge), class: "inline-block bg-oddball hover:bg-oddball-lighter text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" %>
+      <% end %>
     </div>
     <div class="bg-white shadow-md rounded my-6">
       <table class="text-left w-full border-collapse">
@@ -46,8 +49,10 @@
         </tfoot>
       </table>
     </div>
-    <div class="flex justify-end items-center">
-      <%= link_to t('challenge.your_entries.add'), new_challenge_entry_path(challenge_id: @challenge), class: "inline-block bg-oddball hover:bg-oddball-lighter text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" %>
-    </div>
+    <% if @challenge.start_date <= Date.today && @challenge.end_date >= Date.today + 3 %>
+      <div class="flex justify-end items-center">
+        <%= link_to t('challenge.your_entries.add'), new_challenge_entry_path(challenge_id: @challenge), class: "inline-block bg-oddball hover:bg-oddball-lighter text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" %>
+      </div>
+    <% end %>
   </div>
 </div>

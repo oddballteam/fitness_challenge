@@ -1,8 +1,17 @@
 en:
+  activerecord:
+    errors:
+      models:
+        challenge_entry:
+          attributes:
+            completed_date:
+              should_be_during_challenge_dates: "Completed date outside of allowed dates."
   app_title: "Fitness Challenge"
   challenge_entries:
     form_title: "%{action} Entry for %{name}"
   challenge:
+    created_by: "Created by: "
+    size_note: "(Suggested minimum image size is square 200x200)"
     add: "Add Challenge"
     form_title: "%{action} %{name}"
     title: "Challenges"
